@@ -1,0 +1,95 @@
+package view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import controller.Controladora;
+
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class InterfaceGrafica {
+
+	private JFrame frame;
+	private JTextField n1tf;
+	private JTextField n2tf;
+	private JLabel resultadoLb;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InterfaceGrafica window = new InterfaceGrafica();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public InterfaceGrafica() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Numero 1");
+		lblNewLabel.setBounds(10, 10, 81, 13);
+		frame.getContentPane().add(lblNewLabel);
+		
+		n1tf = new JTextField();
+		n1tf.setBounds(126, 7, 96, 19);
+		frame.getContentPane().add(n1tf);
+		n1tf.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("N\u00FAmero 2");
+		lblNewLabel_1.setBounds(10, 48, 81, 13);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		n2tf = new JTextField();
+		n2tf.setBounds(126, 45, 96, 19);
+		frame.getContentPane().add(n2tf);
+		n2tf.setColumns(10);
+		
+		resultadoLb = new JLabel("Resultado: ");
+		resultadoLb.setBounds(10, 91, 175, 13);
+		frame.getContentPane().add(resultadoLb);
+		
+		JButton btnNewButton = new JButton("Calcular");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				calcularSoma();
+			}
+		});
+		btnNewButton.setBounds(10, 115, 81, 13);
+		frame.getContentPane().add(btnNewButton);
+	}
+
+	protected void calcularSoma() {
+		double n1 = Double.valueOf(n1tf.getText());
+		double n2 = Double.valueOf(n2tf.getText());
+		Controladora c = new Controladora();
+		double resultado = c.somar(n1, n2);
+		resultadoLb.setText("Resultado: " + resultado);
+		
+	}
+}
